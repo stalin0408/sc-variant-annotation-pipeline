@@ -1,0 +1,44 @@
+# Nextflow
+work/
+.dag
+.nextflow*
+*.log
+*.trace
+*.report.html
+*.timeline.html
+
+# Data
+data/**/*
+!data/test/
+!data/reference/
+data/test/*
+!data/test/.gitkeep
+data/reference/*
+!data/reference/.gitkeep
+
+# Output
+results/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+env/
+venv/
+.env
+
+# R
+.Rhistory
+.RData
+.Rproj.user
+
+# Docker
+docker-volume/

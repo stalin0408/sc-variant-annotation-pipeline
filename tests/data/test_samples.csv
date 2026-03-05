@@ -1,0 +1,4 @@
+sample_id,bam,barcodes
+sample1,data/test/sample_small.bam,data/test/barcodes.tsv
+sample2,data/test/sample_small.bam,data/test/barcodes.tsv
+

@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  nextflow:
+    image: nextflow/nextflow:latest
+    volumes:
+      - ./:/pipeline
+      - ./data:/data
+      - ./results:/results
+      - /var/run/docker.sock:/var/run/docker.sock
+    working_dir: /pipeline
+    command: run main.nf -profile docker --input /data/test/samplesheet.csv --outdir /results
+    environment:
+      - NXF_VER=23.04.0
+      - NXF_MODE=local
+      - NXF_WORK=/pipeline/work
+    user: "${UID:-1000}:${GID:-1000}"
+
+  development:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    volumes:
+      - ./:/pipeline
+      - ./data:/data
+    working_dir: /pipeline
+    command: tail -f /dev/null
+    stdin_open: true
+    tty: true

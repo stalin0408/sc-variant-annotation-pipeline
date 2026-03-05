@@ -1,0 +1,13 @@
+# Create a placeholder for logo
+
+echo "✅ Directory structure created successfully!"
+echo ""
+echo "Next steps:"
+echo " 1. cd sc-variant-annotation-pipeline"
+echo " 2. Initialize git repository: git init"
+echo " 3. Customize the placeholder files with your pipeline logic"
+echo " 4. Build Docker image: docker build -t sc-variant-annotation:latest -f docker/Dockerfile ."
+echo " 5. Test the pipeline: nextflow run main.nf -profile test --input tests/data/test_samples.csv"
+echo ""
+echo "Directory structure:"
+find . -type d | sort | sed 's/^./ /' | sed 's/^/ /'

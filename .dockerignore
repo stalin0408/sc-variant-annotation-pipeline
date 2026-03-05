@@ -1,0 +1,12 @@
+.git
+.github
+.gitignore
+.dockerignore
+.nextflow*
+work/
+results/
+data/
+tests/
+docs/
+*.md
+LICENSE
