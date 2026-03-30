@@ -7,8 +7,11 @@ A Nextflow pipeline for detecting and annotating variants from single-cell seque
 This pipeline processes single-cell sequencing data to identify and annotate genetic variants. It's designed to be reproducible, scalable, and easy to deploy using Docker containers.
 
 ## Features
-
+Nextflow DSL2 pipeline for:
 - Quality control of single-cell data
+	- BAM QC
+	- Cell filtering
+	- Metrics aggregation
 - Variant calling using multiple tools
 - Comprehensive variant annotation
 - Modular design for easy customization
@@ -23,4 +26,8 @@ git clone https://github.com/yourusername/sc-variant-annotation-pipeline.git
 cd sc-variant-annotation-pipeline
 
 # Run with Docker
-nextflow run main.nf -profile docker --input samplesheet.csv
+```bash
+nextflow run main.nf \
+  --input tests/data/test_samples.csv \
+  --outdir results \
+  -profile docker
