@@ -1,0 +1,5 @@
+task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
+2	14/ca1dcb	100	QUALITY_CONTROL:VALIDATE_BAM (1)	FAILED	126	2026-03-27 11:07:12.888	84ms	26ms	-	-	-	-	-
+4	25/8ea044	136	QUALITY_CONTROL:VALIDATE_BAM (2)	FAILED	126	2026-03-27 11:07:12.908	78ms	3ms	-	-	-	-	-
+1	bb/f27e68	119	QUALITY_CONTROL:CELL_QC_METRICS (1)	FAILED	126	2026-03-27 11:07:12.900	82ms	3ms	-	-	-	-	-
+3	a2/2962a1	236	QUALITY_CONTROL:CELL_QC_METRICS (2)	ABORTED	-	2026-03-27 11:07:12.988	-	-	-	-	-	-	-
