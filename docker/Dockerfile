@@ -32,6 +32,13 @@ RUN apt-get update && apt-get install -y \
     ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
+# Install Java
+RUN apt-get update && apt-get install -y openjdk-17-jre
+
+# Then install Nextflow
+RUN wget -qO- https://get.nextflow.io | bash && \
+    mv nextflow /usr/local/bin/
+
 # Upgrade pip + install Python dependencies
 COPY pyproject.toml /opt/pipeline/
 RUN pip3 install --upgrade pip && \
@@ -70,12 +77,16 @@ COPY subworkflows/ /opt/pipeline/subworkflows/
 COPY conf/ /opt/pipeline/conf/
 COPY main.nf /opt/pipeline/
 COPY nextflow.config /opt/pipeline/
+COPY python_runner.py /app/
+COPY tests/ /app/tests/
+
 
 # Create working directories
-RUN mkdir -p /data /results /work
+RUN mkdir -p /data /results /work /app
 
-WORKDIR /data
+WORKDIR /app
+
+#COPY . .
 
 # Remove entrypoint (important for Nextflow)
-ENTRYPOINT []
-CMD ["bash"]
+ENTRYPOINT ["python3", "python_runner.py"]

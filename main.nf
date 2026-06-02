@@ -1,41 +1,47 @@
 #!/usr/bin/env nextflow
 nextflow.enable.dsl = 2
-/*
---------------------------------------
-Single-cell Variant Annotation Pipeline
---------------------------------------
-*/
-if (!params.outdir) {
-    params.outdir = "results"
-}
-include { QUALITY_CONTROL } from './modules/local/quality_control'
 
+
+/*--------------------------------------
+Single-cell Variant Annotation Pipeline
+--------------------------------------*/
+
+//------------------------------------
+//Sub-workflow
+//------------------------------------
+include { QUALITY_CONTROL } from './subworkflows/preprocessing'
 // Pipeline header
-log.info """
-======================================
-Single-cell Variant Annotation Pipeline
-======================================
-Version: 1.0.0
-"""
 
-log.info "Parameters:"
-log.info " Input: ${params.input}"
-log.info " Output: ${params.outdir}"
-log.info " Genome: ${params.genome}"
-log.info ""
+
 
 // Check required parameters
-if (!params.input) {
+def validateParameters() {
+    if (!params.input) {
     error "Input parameter is required. Please provide --input samplesheet.csv"
+    }
+
+    if (!params.outdir) {
+        params.outdir = "results"
+    }
 }
 
 workflow {
-
+    log.info """
+    ======================================
+    Single-cell Variant Annotation Pipeline
+    ======================================
+    Version: 1.0.0
+    """
+    log.info "Parameters:"
+    log.info " Input: ${params.input}"
+    log.info " Output: ${params.outdir}"
+    log.info " Genome: ${params.genome}"
     /*
     -------------------------
     Load sample sheet
     -------------------------
     */
+    validateParameters()
 
     samples = Channel.fromPath(params.input)
         | splitCsv(header: true, sep: ',')
@@ -126,8 +132,7 @@ workflow.onComplete {
         log.info "Status: SUCCESS ✅"
     } else {
         log.error "Status: FAILED ❌"
-    }
-
+        }
     log.info "Results:"
     log.info "  - QC summaries: ${outdir}/qc/"
     log.info "  - Filtered cells: ${outdir}/filtered_cells/"
@@ -137,6 +142,6 @@ workflow.onComplete {
     log.info ""
     log.info "Duration: ${workflow.duration}"
     log.info "Exit status: ${workflow.exitStatus}"
-}
+    }
 
 }

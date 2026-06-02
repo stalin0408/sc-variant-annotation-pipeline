@@ -6,7 +6,6 @@
 work/
 results/
 data/
-tests/
 docs/
 *.md
 LICENSE
