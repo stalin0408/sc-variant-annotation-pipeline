@@ -18,6 +18,7 @@ data/reference/*
 
 # Output
 results/
+results_verify/
 
 # IDE
 .vscode/
